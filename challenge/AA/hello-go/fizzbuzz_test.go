@@ -3,6 +3,14 @@ run test
 
   go test
   go test -bench .
+  go test -bench FizzBuzz
+
+  go test -bench . -benchtime=10s -count=5
+  go test -bench . -benchmem
+
+  go test -bench FizzBuzzLarge -benchtime=10s
+  go test -bench FizzBuzz -benchmem
+
 */
 
 package main
@@ -29,5 +37,11 @@ func TestFizzBuzz(t *testing.T) {
 func BenchmarkFizzBuzz(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		FizzBuzz(1000)
+	}
+}
+
+func BenchmarkFizzBuzzLarge(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		FizzBuzz(10_000)
 	}
 }
